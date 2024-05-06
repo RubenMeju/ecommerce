@@ -3,6 +3,7 @@
 import { FormEvent } from "react";
 import { Button, Input } from "@nextui-org/react";
 import { signIn } from "next-auth/react";
+import { toast } from "react-toastify";
 
 async function createToken(event: FormEvent<HTMLFormElement>) {
   event.preventDefault(); // Evitar que se recargue la página al enviar el formulario
@@ -20,10 +21,12 @@ async function createToken(event: FormEvent<HTMLFormElement>) {
 
     console.log("fetch login: ", res);
 
-    if (res?.error === null) {
+    if (res?.ok) {
       console.log("logueado con exito");
+      toast("mi toast!");
     } else {
       console.log(res?.error || "Error desconocido");
+      toast(res?.error || "Error desconocido");
     }
   } catch (error) {
     console.error("Error durante el inicio de sesión:", error);

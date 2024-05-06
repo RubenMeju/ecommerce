@@ -27,7 +27,7 @@ export const authOptions = {
         if (!res.ok) {
           throw new Error(user.detail);
         }
-        return null;
+        return user;
       },
     }),
   ],
