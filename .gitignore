@@ -1,0 +1,11 @@
+myenv
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Log files
+*.log
+
+# Media files
+media/
+
