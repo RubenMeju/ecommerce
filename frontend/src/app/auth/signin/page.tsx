@@ -31,7 +31,7 @@ async function createToken(event: FormEvent<HTMLFormElement>) {
   }
 }
 
-export default function SignUp() {
+export default function SignIn() {
   return (
     <div className="w-full h-[calc(100vh-4rem)] flex justify-center items-center">
       <form
@@ -65,7 +65,7 @@ export default function SignUp() {
         <p className="text-sm font-light text-gray-500 dark:text-gray-400 mt-4">
           ¿Aún no tienes una cuenta?
           <a
-            href="#"
+            href="/auth/signup"
             className="font-medium text-primary-600 hover:underline dark:text-primary-50"
           >
             Registrarse
