@@ -14,14 +14,18 @@ import {
   Avatar,
   DropdownMenu,
   DropdownItem,
+  useDisclosure,
 } from "@nextui-org/react";
-import { signOut, useSession } from "next-auth/react";
 import { useState } from "react";
 
+import ModalSignOut from "./ModalSignOut";
+import { useSession } from "next-auth/react";
+
 export default function Nav() {
-  const { data: session } = useSession();
+  const session = useSession();
+  console.log("meju sesion: ", session);
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  console.log("session", session);
   const menuItems = [
     "Profile",
     "Dashboard",
@@ -65,7 +69,8 @@ export default function Nav() {
           </Link>
         </NavbarItem>
       </NavbarContent>
-      {!session ? (
+
+      {session.status === "unauthenticated" ? (
         <NavbarContent justify="end">
           <NavbarItem className="hidden lg:flex">
             <Link href="/auth/signin">Login</Link>
@@ -104,43 +109,46 @@ export default function Nav() {
       </NavbarMenu>
 
       {/*Menu avatar */}
-      {session?.user?.access ? (
-        <NavbarContent as="div" justify="end">
-          <Dropdown placement="bottom-end">
-            <DropdownTrigger>
-              <Avatar
-                isBordered
-                as="button"
-                className="transition-transform"
-                color="secondary"
-                name="Jason Hughes"
-                size="sm"
-                src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-              />
-            </DropdownTrigger>
-            <DropdownMenu aria-label="Profile Actions" variant="flat">
-              <DropdownItem key="profile" className="h-14 gap-2">
-                <p className="font-semibold">Signed in as</p>
-                <p className="font-semibold">{session?.user?.email}</p>
-              </DropdownItem>
-              <DropdownItem key="settings">
-                <Link href="/profile" className="w-full">
-                  Profile
-                </Link>
-              </DropdownItem>
-              <DropdownItem key="team_settings">Team Settings</DropdownItem>
-              <DropdownItem key="analytics">Analytics</DropdownItem>
-              <DropdownItem key="system">System</DropdownItem>
-              <DropdownItem key="configurations">Configurations</DropdownItem>
-              <DropdownItem key="help_and_feedback">
-                Help & Feedback
-              </DropdownItem>
-              <DropdownItem key="logout" color="danger">
-                <button onClick={() => signOut()}>Sign out</button>
-              </DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
-        </NavbarContent>
+      {session.status === "authenticated" ? (
+        <>
+          <NavbarContent as="div" justify="end">
+            <Dropdown placement="bottom-end">
+              <DropdownTrigger>
+                <Avatar
+                  isBordered
+                  as="button"
+                  className="transition-transform"
+                  color="secondary"
+                  name="Jason Hughes"
+                  size="sm"
+                  src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                />
+              </DropdownTrigger>
+              <DropdownMenu aria-label="Profile Actions" variant="flat">
+                <DropdownItem key="profile" className="h-14 gap-2">
+                  <p className="font-semibold">Signed in as</p>
+                  <p className="font-semibold">el email</p>
+                </DropdownItem>
+                <DropdownItem key="settings">
+                  <Link href="/profile" className="w-full">
+                    Profile
+                  </Link>
+                </DropdownItem>
+                <DropdownItem key="team_settings">Team Settings</DropdownItem>
+                <DropdownItem key="analytics">Analytics</DropdownItem>
+                <DropdownItem key="system">System</DropdownItem>
+                <DropdownItem key="configurations">Configurations</DropdownItem>
+                <DropdownItem key="help_and_feedback">
+                  Help & Feedback
+                </DropdownItem>
+                <DropdownItem key="logout" color="danger">
+                  <Button onPress={onOpen}>Cerrar sesión</Button>
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          </NavbarContent>
+          <ModalSignOut isOpen={isOpen} onOpenChange={onOpenChange} />
+        </>
       ) : null}
     </Navbar>
   );
