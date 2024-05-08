@@ -1,4 +1,5 @@
 import { Button, Input } from "@nextui-org/react";
+import Link from "next/link";
 //import { toast } from "react-toastify";
 
 export default function SignUp() {
@@ -83,12 +84,12 @@ export default function SignUp() {
 
         <p className="text-sm font-light text-gray-500 dark:text-gray-400 mt-4">
           ¿Ya tienes una cuenta?
-          <a
-            href="#"
+          <Link
+            href="/auth/signin"
             className="font-medium text-primary-600 hover:underline dark:text-primary-50"
           >
             Login
-          </a>
+          </Link>
         </p>
       </form>
     </div>

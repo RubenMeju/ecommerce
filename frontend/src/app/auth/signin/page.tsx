@@ -4,6 +4,7 @@ import { FormEvent } from "react";
 import { Button, Input } from "@nextui-org/react";
 import { signIn } from "next-auth/react";
 import { toast } from "react-toastify";
+import Link from "next/link";
 
 async function createToken(event: FormEvent<HTMLFormElement>) {
   event.preventDefault(); // Evitar que se recargue la página al enviar el formulario
@@ -64,12 +65,12 @@ export default function SignIn() {
 
         <p className="text-sm font-light text-gray-500 dark:text-gray-400 mt-4">
           ¿Aún no tienes una cuenta?
-          <a
+          <Link
             href="/auth/signup"
             className="font-medium text-primary-600 hover:underline dark:text-primary-50"
           >
             Registrarse
-          </a>
+          </Link>
         </p>
       </form>
     </div>
