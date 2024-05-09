@@ -5,6 +5,7 @@ import {
   Image,
   CardFooter,
 } from "@nextui-org/react";
+import Link from "next/link";
 
 interface Product {
   id: number;
@@ -13,9 +14,11 @@ interface Product {
   name: string;
   description: string;
   price: string;
+  image: string;
+  slug: string;
 }
 
-interface Attribute {
+export interface Attribute {
   attribute_name: string;
   value: string;
 }
@@ -38,27 +41,28 @@ export default async function Home() {
   return (
     <div className="gap-2 grid grid-cols-2 sm:grid-cols-4">
       {data.map((product: Product) => (
-        <Card
-          shadow="sm"
-          key={product.id}
-          isPressable
-          //onPress={() => console.log("item pressed")}
-        >
-          <CardBody className="overflow-visible p-0">
-            <Image
-              shadow="sm"
-              radius="lg"
-              width="100%"
-              alt={product.name}
-              className="w-full object-cover h-[140px]"
-              src={product.image}
-            />
-          </CardBody>
-          <CardFooter className="text-small justify-between">
-            <b>{product.name}</b>
-            <p className="text-default-500">{product.price}</p>
-          </CardFooter>
-        </Card>
+        <Link href={`/product/${product.slug}`} key={product.id}>
+          <Card
+            shadow="sm"
+            //isPressable
+            //onPress={() => console.log("item pressed")}
+          >
+            <CardBody className="overflow-visible p-0">
+              <Image
+                shadow="sm"
+                radius="lg"
+                width="100%"
+                alt={product.name}
+                className="w-full object-cover h-[140px]"
+                src={product.image}
+              />
+            </CardBody>
+            <CardFooter className="text-small justify-between">
+              <b>{product.name}</b>
+              <p className="text-default-500">{product.price}</p>
+            </CardFooter>
+          </Card>
+        </Link>
       ))}
     </div>
   );

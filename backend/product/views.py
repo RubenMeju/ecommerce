@@ -7,11 +7,13 @@ from .serializers import ProductSerializer, AttributeSerializer
 class AttributeViewSet(viewsets.ModelViewSet):
     queryset = Attribute.objects.all()
     serializer_class = AttributeSerializer
+   # filterset_fields = ['slug', 'category']
 
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    filterset_fields = ['category', 'slug']
 
     def create(self, request, *args, **kwargs):
         # Extraer los datos de los atributos del request.data
