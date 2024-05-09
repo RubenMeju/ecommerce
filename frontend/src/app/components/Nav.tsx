@@ -7,7 +7,6 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
-  Link,
   Button,
   Dropdown,
   DropdownTrigger,
@@ -20,6 +19,7 @@ import { useState } from "react";
 
 import ModalSignOut from "./ModalSignOut";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 export default function Nav() {
   const session = useSession();
@@ -55,7 +55,7 @@ export default function Nav() {
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
           <Link color="foreground" href="/">
-            Inicio
+            Iniciooo
           </Link>
         </NavbarItem>
         <NavbarItem isActive>
@@ -100,7 +100,6 @@ export default function Nav() {
               }
               className="w-full"
               href="#"
-              size="lg"
             >
               {item}
             </Link>

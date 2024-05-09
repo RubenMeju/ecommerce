@@ -33,6 +33,10 @@ INSTALLED_APPS = [
     'drf_spectacular',
 
     'user',
+    'product',
+    'category',
+    'brand',
+
 ]
 
 AUTH_USER_MODEL = "user.User"
