@@ -1,6 +1,6 @@
 import { Attribute } from "@/app/page";
-import CartIcon from "@/icons/CartIcon";
-import { Button, Image, Link } from "@nextui-org/react";
+import { Image } from "@nextui-org/react";
+import ButtonsCart from "./components/ButtonsCart";
 
 async function getProductBySlug(slug: string) {
   const res = await fetch(`http://127.0.0.1:8000/products/?slug=${slug}`);
@@ -39,15 +39,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           </div>
         ))}
       </div>
-
-      <div className="flex gap-4 items-center">
-        <Button color="primary" variant="bordered" endContent={<CartIcon />}>
-          Añadir a la cesta
-        </Button>
-        <Button color="primary" href="/cart" as={Link}>
-          Comprar
-        </Button>
-      </div>
+      <ButtonsCart />
     </div>
   );
 }
