@@ -20,10 +20,10 @@ import { useState } from "react";
 import ModalSignOut from "./ModalSignOut";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import DrawerCart from "./DrawerCart";
 
 export default function Nav() {
   const session = useSession();
-  console.log("meju sesion: ", session);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuItems = [
@@ -47,7 +47,7 @@ export default function Nav() {
           className="sm:hidden"
         />
         <NavbarBrand>
-          <span>Logo</span>
+          <Link href="/">Logo</Link>
           <p className="font-bold text-inherit">ACME</p>
         </NavbarBrand>
       </NavbarContent>
@@ -149,6 +149,8 @@ export default function Nav() {
           <ModalSignOut isOpen={isOpen} onOpenChange={onOpenChange} />
         </>
       ) : null}
+
+      <DrawerCart />
     </Navbar>
   );
 }
