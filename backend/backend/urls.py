@@ -29,6 +29,8 @@ urlpatterns = [
 
     path('', include('product.urls')),
     path('', include('category.urls')),
+    path('', include('cart.urls')),
+
 
     # Optional UI:
     path('api/schema/swagger-ui/',
