@@ -1,7 +1,9 @@
 import os
+from dotenv import load_dotenv
 from pathlib import Path
 from datetime import timedelta
 
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -30,6 +32,7 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework',
     'djoser',
+
     'drf_spectacular',
 
     'user',
@@ -159,7 +162,7 @@ SIMPLE_JWT = {
 
 DOMAIN = "127.0.0.1:3000"
 
-white_list = ['http://localhost:8000/accounts/profile/']
+# white_list = ["http://localhost:3000"]
 
 DJOSER = {
     "LOGIN_FIELD": "email",
@@ -174,8 +177,8 @@ DJOSER = {
     "PASSWORD_RESET_CONFIRM_RETYPE": True,
     "USERNAME_RESET_CONFIRM_URL": "email/reset/confirm/{uid}/{token}",
     "ACTIVATION_URL": "auth/activation?uid={uid}&token={token}",
-    "SOCIAL_AUTH_TOKEN_STRATEGY": "djoser.social.token.jwt.TokenStrategy",
-    "SOCIAL_AUTH_ALLOWED_REDIRECT_URIS": white_list,
+    # "SOCIAL_AUTH_TOKEN_STRATEGY": "djoser.social.token.jwt.TokenStrategy",
+    #  "SOCIAL_AUTH_ALLOWED_REDIRECT_URIS": white_list,
     "SERIALIZERS": {
         "user_create": "user.serializers.UserSerializer",
         "user": "user.serializers.UserSerializer",
@@ -206,4 +209,9 @@ SPECTACULAR_SETTINGS = {
 FILE_UPLOAD_PERMISSIONS = 0o640
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = os.getenv("EMAIL_PORT", default=587)
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+EMAIL_USE_TLS = True
