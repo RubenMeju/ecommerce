@@ -4,8 +4,7 @@ from product.serializers import ProductSerializer
 
 
 class CartItemSerializer(serializers.ModelSerializer):
-    # Usa el serializer del modelo Product para serializar el producto
-    product = ProductSerializer()
+    product = ProductSerializer()  # Serializador del producto asociado
 
     class Meta:
         model = CartItem
@@ -13,8 +12,8 @@ class CartItemSerializer(serializers.ModelSerializer):
 
 
 class CartSerializer(serializers.ModelSerializer):
-    # Indica que los items son solo para lectura
-    items = CartItemSerializer(many=True, read_only=True)
+    # Serializador de los elementos del carrito
+    items = CartItemSerializer(many=True)
 
     class Meta:
         model = Cart

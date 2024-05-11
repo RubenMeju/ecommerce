@@ -3,6 +3,11 @@ import { useDrawer } from "../providers";
 
 export default function DrawerCart() {
   const { toggleDrawer, isOpen } = useDrawer();
+
+  const getCartProducts = async () => {
+    const res = await fetch("/api/cart");
+    console.log("qpasa", res);
+  };
   return (
     <>
       <button onClick={toggleDrawer}>
@@ -15,6 +20,8 @@ export default function DrawerCart() {
             <p className="text-xl font-bold">Mí carrito</p>
             <button onClick={toggleDrawer}>X</button>
           </div>
+
+          <button onClick={getCartProducts}>mostrar productos</button>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores
             ea aliquid similique, magni tempore necessitatibus nam dolore, sit

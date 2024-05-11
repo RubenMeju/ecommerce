@@ -39,7 +39,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           </div>
         ))}
       </div>
-      <ButtonsCart />
+      <ButtonsCart product={product} />
     </div>
   );
 }
