@@ -1,9 +1,7 @@
 from djoser.serializers import PasswordResetConfirmSerializer
 from djoser.serializers import UserCreateSerializer
 
-from django.contrib.auth import get_user_model
-
-User = get_user_model()
+from user.models import User
 
 
 class UserSerializer(UserCreateSerializer):

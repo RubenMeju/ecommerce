@@ -1,14 +1,11 @@
-import { signIn } from "@/auth";
+import ButtonSignInGoogle from "./components/ButtonSignInGoogle";
+import FormSignIn from "./components/FormSignIn";
 
 export default function page() {
   return (
-    <form
-      action={async () => {
-        "use server";
-        await signIn("google");
-      }}
-    >
-      <button type="submit">Signin with Google</button>
-    </form>
+    <div className="w-full h-[calc(100vh-4rem)] flex flex-col justify-center items-center">
+      <FormSignIn />
+      <ButtonSignInGoogle />
+    </div>
   );
 }
